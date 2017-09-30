@@ -10,6 +10,8 @@ def import_data():
     for q in data['features']:
         if q['properties']['type'] == "earthquake":
             if Earthquake_Data.objects.filter(id=q['id']).exists():
+                pass
+            else:
                 try:
                     x = Earthquake_Data()
                     x.import_data(q)
