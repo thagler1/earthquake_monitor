@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.gis.db import models
+from django.contrib.gis.geos import GEOSGeometry
 import datetime
 
 
@@ -32,6 +34,9 @@ class Earthquake_Data(models.Model):
     xupdated = models.DateTimeField(null=True, default=None)
     url= models.URLField(null=True, default=None)
     id = models.CharField(max_length=15, primary_key=True, unique=True)
+    coords = models.PointField(default=None, null=True)
+    objects = models.GeoManager()
+
 
     def __str__(self):
         return self.title
@@ -52,6 +57,11 @@ class Earthquake_Data(models.Model):
         rtime = datetime.datetime.utcfromtimestamp(int(element['properties']['time'])/1000)
         rtime += datetime.timedelta(minutes=self.tz)
         self.xtime = rtime
+
+        self.coords = GEOSGeometry('POINT(%s %s)' % (
+            element['geometry']['coordinates'][0],
+            element['geometry']['coordinates'][1]), srid=4326)
+
 
         #self.xtime = datetime.datetime.strptime(t)
         try:
