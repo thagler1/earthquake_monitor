@@ -16,9 +16,17 @@ class EarthQuakeViewSet(viewsets.ModelViewSet):
 
 class LastHour(viewsets.ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
+    API endpoint that shows earthquakes in the last hour
     """
     queryset = Earthquake_Data.objects.filter(xtime__gte = datetime.datetime.utcnow() - datetime.timedelta(hours=1))
+    serializer_class = EarthquakeDataSerializer
+
+class LasthourPipelines(viewsets.ModelViewSet):
+    """
+    API endpoint that shows pipeline affected by earthquakes in the last hour
+    currently shows all pipelines
+    """
+    queryset = UserAsset.objects.all()
     serializer_class = EarthquakeDataSerializer
 
 def manual_update(request):

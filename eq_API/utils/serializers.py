@@ -6,3 +6,4 @@ class EarthquakeDataSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Earthquake_Data
         fields = ('url', 'title', 'mag', 'detail', 'xtime')
+
