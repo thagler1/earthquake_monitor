@@ -92,7 +92,7 @@ class UserAsset(models.Model):
     point = models.PointField(default=None, null=True)
     lineString = models.LineStringField(default=None, null=True)
     polygon = models.PolygonField(default=None, null=True)
-    owner = models.OneToOneField(Customer)
+    owner = models.ForeignKey(Customer)
 
     def __str__(self):
         return self.assetName

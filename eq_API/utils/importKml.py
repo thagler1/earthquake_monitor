@@ -34,7 +34,7 @@ def manual_add_kml():
     geos = layer.get_geoms(geos=True)
     for index, i in enumerate(layer):
         asset = UserAsset()
-        asset.owner = customer.id
+        asset.owner = customer
         asset.lineString = geos[index]
         asset.assetName = i.get('Name')
         asset.min_mag = 2
