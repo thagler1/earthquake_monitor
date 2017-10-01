@@ -8,9 +8,7 @@ from ..models import *
 # After getting getting Kml from user, save to a temporary file.
 
 
-#load temp file into ds
-ds = DataSource("data.kml")
-geoms = ds[0].get_geoms(geos=True)
+
 
 # map fields to model
 def mapToModel(field_dict, layer):
