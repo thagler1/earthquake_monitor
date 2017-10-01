@@ -90,7 +90,7 @@ class UserAsset(models.Model):
     min_warn_distance = models.FloatField(default=10)
     contact_email = models.EmailField(default=None, null=True)
     point = models.PointField(default=None, null=True)
-    line = models.LineStringField(default=None, null=True)
+    lineString = models.LineStringField(default=None, null=True)
     polygon = models.PolygonField(default=None, null=True)
     owner = models.OneToOneField(Customer)
 
