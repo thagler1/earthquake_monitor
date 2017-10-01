@@ -1,6 +1,7 @@
 # https://stackoverflow.com/questions/38218996/how-can-i-get-a-django-rest-framework-with-a-sub-query-on-child-related-items-wo
 from ..models import *
 from rest_framework import serializers
+from django.contrib.gis.measure import Distance, D
 
 
 class AffectedPipelineSerializer(serializers.HyperlinkedModelSerializer):
@@ -18,7 +19,7 @@ class Earthquakepipelineserializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'title', 'mag','coords', 'detail', 'xtime', 'pipes')
 
     def get_pipes(self, obj):
-        pipelines = UserAsset.objects.filter(lineString__distance_lte=(self.coords, D(mi=75)))
+        pipelines = UserAsset.objects.filter(lineString__distance_lte=(obj.coords, D(mi=75)))
         serializer = AffectedPipelineSerializer(pipelines, many=True)
         return serializer.data
 
