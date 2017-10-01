@@ -19,8 +19,9 @@ class Earthquakepipelineserializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'title', 'mag','coords', 'detail', 'xtime', 'pipes')
 
     def get_pipes(self, obj):
-        pipelines = UserAsset.objects.filter(lineString__distance_lte=(obj.coords, D(mi=75)))
-        serializer = AffectedPipelineSerializer(pipelines)
+        queryset = UserAsset.objects.filter(lineString__distance_lte=(obj.coords, D(mi=200)))
+
+        serializer = AffectedPipelineSerializer(queryset)
         return serializer.data
 
 class EarthquakeDataSerializer(serializers.HyperlinkedModelSerializer):
