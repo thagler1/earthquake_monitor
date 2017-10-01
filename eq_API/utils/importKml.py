@@ -31,13 +31,13 @@ def manual_add_kml():
     layer = ds[0]
 
     customer = Customer.objects.get(name="Todd")
-
-    for i in layer:
+    geos = layer.get_geoms(geos=True)
+    for index, i in enumerate(layer):
         asset = UserAsset()
         asset.owner = customer
-        asset.lineString = i.geom
+        asset.lineString = geos[index]
         asset.assetName = i.get('Name')
         asset.min_mag = 2
         asset.min_warn_distance = 200
         asset.save()
-    print(i.get('Name'))
+        print(i.get('Name'))
