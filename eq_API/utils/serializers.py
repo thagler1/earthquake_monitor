@@ -7,7 +7,7 @@ from django.contrib.gis.measure import Distance, D
 class AffectedPipelineSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = UserAsset
-        fields = ('assetName')
+        fields = ['assetName',]
 
 
 class Earthquakepipelineserializer(serializers.HyperlinkedModelSerializer):
@@ -20,7 +20,7 @@ class Earthquakepipelineserializer(serializers.HyperlinkedModelSerializer):
 
     def get_pipes(self, obj):
         pipelines = UserAsset.objects.filter(lineString__distance_lte=(obj.coords, D(mi=75)))
-        serializer = AffectedPipelineSerializer(pipelines, many=True)
+        serializer = AffectedPipelineSerializer(pipelines)
         return serializer.data
 
 class EarthquakeDataSerializer(serializers.HyperlinkedModelSerializer):
