@@ -20,6 +20,7 @@ class Earthquakepipelineserializer(serializers.HyperlinkedModelSerializer):
 
     def get_pipes(self, obj):
         queryset = UserAsset.objects.filter(lineString__distance_lte=(obj.coords, D(mi=200)))
+        print(queryset.count())
         serializer = AffectedPipelineSerializer(queryset)
         return serializer.data
 
