@@ -3,6 +3,8 @@ from rest_framework import viewsets
 from .utils.serializers import EarthquakeDataSerializer
 from .models import *
 import datetime
+from .usgs.eq_import import import_data
+from django.http import HttpResponse
 
 class EarthQuakeViewSet(viewsets.ModelViewSet):
     """
@@ -18,3 +20,8 @@ class LastHour(viewsets.ModelViewSet):
     """
     queryset = Earthquake_Data.objects.filter(xtime__gte = datetime.datetime.utcnow() - datetime.timedelta(hours=1))
     serializer_class = EarthquakeDataSerializer
+
+def manual_update(request):
+    import_data()
+    return HttpResponse("Updated")
+

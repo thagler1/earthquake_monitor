@@ -31,6 +31,7 @@ router.register(r'lasthour', views.LastHour)
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(router.urls)),
-    url(r'^api/', include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^manual/', views.manual_update)
     ]
 
