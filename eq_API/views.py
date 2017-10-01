@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from .utils.serializers import EarthquakeDataSerializer
+from .utils.serializers import EarthquakeDataSerializer, Earthquakepipelineserializer
 from .models import *
 import datetime
 from .usgs.eq_import import import_data
@@ -26,8 +26,8 @@ class LasthourPipelines(viewsets.ModelViewSet):
     API endpoint that shows pipeline affected by earthquakes in the last hour
     currently shows all pipelines
     """
-    queryset = UserAsset.objects.all()
-    serializer_class = EarthquakeDataSerializer
+    queryset = Earthquake_Data.objects.filter(xtime__gte = datetime.datetime.utcnow() - datetime.timedelta(hours=1))
+    serializer_class = Earthquakepipelineserializer
 
 def manual_update(request):
     import_data()

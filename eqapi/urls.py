@@ -26,7 +26,7 @@ from eq_API import views
 router = routers.DefaultRouter()
 router.register(r'users', views.EarthQuakeViewSet)
 router.register(r'lasthour', views.LastHour)
-
+router.register(r'recent', views.LasthourPipelines)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
