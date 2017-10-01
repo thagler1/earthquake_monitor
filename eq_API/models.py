@@ -69,3 +69,30 @@ class Earthquake_Data(models.Model):
         except Exception as e:
             print(e)
         return self
+
+
+    class Asset(models.Model):
+        objects = models.GeoManager()
+
+class Customer(models.Model):
+    name = models.CharField(max_length=200, default=None)
+    email = models.EmailField(default=None)
+
+
+    def __str__(self):
+        return self.name
+
+
+class UserAsset(models.Model):
+    objects = models.GeoManager()
+    assetName = models.CharField(max_length=200, default=None, null=True)
+    min_mag = models.FloatField(default=1)
+    min_warn_distance = models.FloatField(default=10)
+    contact_email = models.EmailField(default=None, null=True)
+    point = models.PointField(default=None, null=True)
+    line = models.LineStringField(default=None, null=True)
+    polygon = models.PolygonField(default=None, null=True)
+    owner = models.OneToOneField(Customer)
+
+    def __str__(self):
+        return self.assetName
