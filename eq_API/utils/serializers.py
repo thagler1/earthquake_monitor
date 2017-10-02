@@ -5,6 +5,7 @@ from django.contrib.gis.measure import Distance, D
 
 
 class AffectedPipelineSerializer(serializers.HyperlinkedModelSerializer):
+    print("made it here")
     class Meta:
         model = UserAsset
         fields = ['assetName',]

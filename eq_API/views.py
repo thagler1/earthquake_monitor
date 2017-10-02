@@ -8,7 +8,7 @@ from django.http import HttpResponse
 
 class EarthQuakeViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
+    API endpoint that shows all seismic events in the database.
     """
     queryset = Earthquake_Data.objects.all()
     serializer_class = EarthquakeDataSerializer
